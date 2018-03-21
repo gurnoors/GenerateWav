@@ -15,8 +15,6 @@ def get_random(count):
 
     r = requests.get(url=url)
     # TODO: errors
-    print r.text
-    print type(r.text)
     return [int(line) for line in r.text.split('\n') if line]
 
 def generate(filepath='sound.wav', values_to_receive=None):
@@ -27,11 +25,8 @@ def generate(filepath='sound.wav', values_to_receive=None):
         needed = int(duration * sampleRate)
         quota = int(get_quota() / 64 / 10)
         values_to_receive = min(needed, quota)
-        print values_to_receive
 
-    # values = get_random(values_to_receive)
-    values = range(10)
-    print('len', len(values))
+    values = get_random(values_to_receive)
 
     wavef = wave.open(filepath, 'w')
     wavef.setnchannels(1)  # mono
